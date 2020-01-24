@@ -8,10 +8,8 @@ while True:
     time.sleep(2)
     strip.fill(colors.ColorSets.RGB)
     time.sleep(2)
-    strip.fill('#ffffff')
+    strip.fill("#ffffff")
     time.sleep(2)
 
 while True:
     strip.breathe(colors.Colors.WHITE)
-
-

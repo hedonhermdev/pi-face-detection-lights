@@ -1,6 +1,7 @@
 # Colors
 
-OFF = (0,0,0)
+OFF = (0, 0, 0)
+
 
 def hex_to_rgb(hex_string):
     _hex = hex_string.lstrip("#")
@@ -61,4 +62,3 @@ class _ColorSets:
 
 Colors = _Colors()
 ColorSets = _ColorSets()
-
