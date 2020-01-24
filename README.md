@@ -1,5 +1,7 @@
 # pi-face-detection-lights
 Basically stuck a strip of lights on the wall behind my workspace and used some face detection to switch them on when I sit on the chair.
+
+![Image](image.jpg?raw=true "Image")
 # Components (Hardware)
 1. Raspberry Pi
 2. NeoPixels (or any other WS2812 lights)
@@ -8,9 +10,10 @@ Basically stuck a strip of lights on the wall behind my workspace and used some 
 Note: The Pi and the host computer must be on the same network. 
 
 # Setting Up
-Setting up is a pain. Will update this section with (hopefully) helpful images soon.  
+Setting up is a pain. Will update this section with (hopefully) helpful images soon.
 
 # Working
+![Diagram](diagram.png?raw=true "Diagram")
 1. Establish a TCP/IP connection between Pi and Mac.
 2. Host a flask server on Pi.
 3. Camera captures continuously and sends image as bytestream to Mac 
@@ -25,6 +28,3 @@ The lighting server can be used in combination with the lighting module to build
 
 # The Rest
 Other than the parts mentioned above, the code isnt really reusable right now as it is heavily dependent on my current setup, but you can take inspiration from it to build your own. That being said, I am working on making it as modular and reusable as possible. 
-
-# Note
-This can probably be done without both the socket and the webserver part but the above code was written after frustrating failed attempts to install OpenCV on my Raspberry Pi.
