@@ -6,7 +6,7 @@ except (ImportError, RuntimeError) as e:
     exit()
 
 from . import colors
-from .colors import hex_to_rgb, scale
+from .colors import hex_to_rgb, scale, OFF
 import time
 
 
@@ -18,11 +18,11 @@ class Lights:
         self.state = 'OFF'
 
     def _fill_with_color(self, color, _range=None, _scale=1):
+        print(_range)
         if not _range:
-            self.pixels.fill(scale(color, _scale))
-        else:
-            for i in range(_range):
-                self.pixels[i] = scale(color, _scale)
+            _range = (0, self.length)
+        for i in range(*_range):
+            self.pixels[i] = scale(color, _scale)
         self.pixels.show()
         self.state = 'ON'
 
@@ -30,8 +30,8 @@ class Lights:
         if not _range:
             for i in range(self.length):
                 self.pixels[i] = scale(colorset[i % len(colorset)], _scale)
-        for i in range(**_range):
-            self.pixels[i] = scale(colorset[i % len(colorset)])
+        for i in range(*_range):
+            self.pixels[i] = scale(colorset[i % len(colorset)], _scale)
         self.pixels.show()
         self.state = 'ON'
 
@@ -43,10 +43,11 @@ class Lights:
 
     def fill(self, color_or_colorset, _range=None, _scale=1):
         if isinstance(color_or_colorset, tuple):
-            self._fill_with_color(color_or_colorset, _scale=_scale)
+            self._fill_with_color(color_or_colorset, _range=_range, _scale=_scale)
         elif isinstance(color_or_colorset, list):
-            self._fill_with_colorset(color_or_colorset, _scale=_scale)
+            self._fill_with_colorset(color_or_colorset, _range=_range, _scale=_scale)
         elif isinstance(color_or_colorset, str):
+            print(color_or_colorset)
             color = hex_to_rgb(color_or_colorset)
             self._fill_with_color(color, _range, _scale=_scale)
 
@@ -79,24 +80,14 @@ class Lights:
             time.sleep(1/steps_per_second)
             color = tuple(int(color[i] + color_step[i]) for i in range(3))
 
-
     def breathe(self, color):
         self.transition(color, color)
 
     def runner(self, color):
-        for i in range(**_range):
+        for i in range(self.length):
             self.pixels[i] = color
             if i != 0:
-                self.pixels[i - 1] = Colors.OFF
-
-
-    # Light effects
-    def static_rainbow(self):
-        colorset = colors.ColorSets.VIBGYOR
-        self._fill_with_colorset(colorset)
-
-    def static_rgb(self):
-        colorset = colors.ColorSets.RGB
-        self._fill_with_colorset(colors.ColorSets.RGB)
-
+                self.pixels[i - 1] = colors.OFF
+            self.pixels.show()
+            time.sleep(0.1)
 

@@ -11,6 +11,11 @@ app = Flask(__name__)
 l = Lights(240)
 print(l)
 
+@app.route('/', methods=['GET'])
+def index():
+    return "Up and Running!!!"
+
+
 @app.route('/lights/state/', methods=['POST','GET'])
 def lights_state():
     return jsonify({'state': l.state}), 200
@@ -18,17 +23,19 @@ def lights_state():
 
 @app.route('/lights/fill/', methods=['POST',])
 def lights_fill():
-    print(request.json)
     data = request.json
-    print(data)
     if not data:
         return "{}", 400
     try:
-        l.fill(data['color'])
+        color = data['color']
+        _scale = data['scale']
+        _range = data['range']
+        l.fill(color, _scale=_scale, _range=_range)
         return "{}", 200
     except Exception as e:
         print(e)
         return "{}", 400
+
 
 @app.route('/lights/off/', methods=['GET',])
 def lights_off():
@@ -38,4 +45,4 @@ def lights_off():
 
 if __name__ == "__main__":
     app.debug == True
-    app.run(host='10.3.141.1', port=5000, threaded=False)
+    app.run(host='0.0.0.0', port=5000, threaded=False)

@@ -8,7 +8,6 @@ def hex_to_rgb(hex_string):
 
 
 def scale(color, factor):
-    print( tuple(int(c * factor) for c in color) )
     return tuple(int(c * factor) for c in color)
 
 
