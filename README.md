@@ -23,6 +23,8 @@ Setting up is a pain. Will update this section with (hopefully) helpful images s
 # Lighting
 The lighting code is completely independent of the project and can be used as a part of any other project. It contains a bunch of effects you can use on any WS2812 lights (not necessarily NeoPixels)
 
+# Face Detection
+The face detection server uses an MTCNN model to detect faces in the image sent by the Pi (client). If a face is detected in 5 subsequent frames, then it sends a request to the Lighting Server. Else if a face is not detected in 5 subsequent frames, then it sends a request to switch off the lights.
 # Lighting Server
 The lighting server can be used in combination with the lighting module to build a portal for controlling the lights(?). That is what I am going to work on next, btw.
 
