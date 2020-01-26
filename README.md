@@ -23,7 +23,7 @@ Setting up is a pain. Will update this section with (hopefully) helpful images s
 # Lighting
 The lighting code is completely independent of the project and can be used as a part of any other project. It contains a bunch of effects you can use on any WS2812 lights (not necessarily NeoPixels)
 Example Use:
-```
+```python
 import time
 
 from lighting.lights import Lights
@@ -48,7 +48,7 @@ The lighting server can be used in combination with the lighting module to build
 Example requests on the lighting server:
 
 1. To fill the lights
-```
+```bash
 $ curl --location --request POST 'tirthraspberrypi.local:5000/lights/fill/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -60,7 +60,7 @@ $ curl --location --request POST 'tirthraspberrypi.local:5000/lights/fill/' \
 ```
 
 2. To switch off the lights
-```
+```bash
 $ curl --location --request GET 'tirthraspberrypi.local:5000/lights/fill/'
 ```
 
