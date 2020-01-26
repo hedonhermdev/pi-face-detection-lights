@@ -1,5 +1,4 @@
 from flask import Flask, request, abort, jsonify
-from flask import g
 
 from lighting.lights import Lights
 from lighting.colors import Colors, ColorSets
@@ -32,7 +31,7 @@ def lights_fill():
         _scale = data["scale"]
         _range = data["range"]
         l.fill(color, _scale=_scale, _range=_range)
-        return "{}", 200
+        return jsonify({'color': color, 'scale': _scale, 'range': _range}), 200
     except Exception as e:
         print(e)
         return "{}", 400
@@ -46,4 +45,4 @@ def lights_off():
 
 if __name__ == "__main__":
     app.debug == True
-    app.run(host="0.0.0.0", port=5000, threaded=False)
+    app.run(host="0.0.0.0", port=5000, threaded=False) # threaded=False is important because Lights are set as a global variable

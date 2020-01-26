@@ -18,14 +18,12 @@ try:
     # Start a preview and let the camera warm up for 2 seconds
     camera.start_preview()
     time.sleep(2)
-
-    # Note the start time and construct a stream to hold image data
+    # Construct a stream to hold image data
     # temporarily (we could write it directly to connection but in this
     # case we want to find out the size of each capture first to keep
     # our protocol simple)
-    start = time.time()
     stream = io.BytesIO()
-    for _ in camera.capture_continuous(stream, "jpeg"):
+    for _ in camera.capture_continuous(stream, "jpeg", use_video_port=True):
         # Write the length of the capture to the stream and flush to
         # ensure it actually gets sent
         connection.write(struct.pack("<L", stream.tell()))
